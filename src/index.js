@@ -12,7 +12,7 @@ const beforeStyles = {
 
 const afterStyles = {
   display: "block",
-  content: "",
+  content: "''",
   clear: "both",
 };
 
