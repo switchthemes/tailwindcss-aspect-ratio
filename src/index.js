@@ -4,18 +4,6 @@ const baseStyles = {
   aspectRatio: "var(--tw-aspect-w) / var(--tw-aspect-h)",
 };
 
-const beforeStyles = {
-  float: "left",
-  content: "''",
-  paddingTop: `calc(var(--tw-aspect-h) / var(--tw-aspect-w) * 100%)`,
-};
-
-const afterStyles = {
-  display: "block",
-  content: "''",
-  clear: "both",
-};
-
 const aspectRatio = plugin(
   function ({ addComponents, matchComponents, theme, variants, e }) {
     const values = theme("aspectRatio");
@@ -43,26 +31,10 @@ const aspectRatio = plugin(
       })
       .join(",\n");
 
-    const beforeSelectors = Object.entries(values)
-      .map(([key, value]) => {
-        return `.${e(`aspect-w-${key}`)}::before`;
-      })
-      .join(",\n");
-
-    const afterSelectors = Object.entries(values)
-      .map(([key, value]) => {
-        return `.${e(`aspect-w-${key}`)}::after`;
-      })
-      .join(",\n");
-
     addComponents(
       [
         {
           [baseSelectors]: baseStyles,
-          "@supports not (aspect-ratio: 1 / 1)": {
-            [beforeSelectors]: beforeStyles,
-            [afterSelectors]: afterStyles,
-          },
         },
         Object.entries(values).map(([key, value]) => {
           return {
